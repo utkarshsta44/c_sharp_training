@@ -199,7 +199,36 @@ namespace Assingment001
 
          }
          */
+        //UPDATED MAGICAL STRING USING STRING BUILDER AND STRING OPERATIONS .
+        /*
+        private static bool IsMagical(string str)
+        { 
+            StringBuilder sb = new StringBuilder(str);
+            int sum = 0;
+            bool endProcess = false;
+            while (!endProcess)
+            {
+                for (int i = 0; i < sb.Length; i++)
+                {
+                    int n = sb[i] - '0';
+                    sum += n;
+                }
+                if (sum >= 10)
+                {
+                    sb.Clear();
+                    sb.Append(sum.ToString());
+                    sum = 0;
+                }
+                else
+                {
+                    endProcess = true;
+                }
+            }
+            return sum == 1;
+        }
+*/
 
+        
         //question 5:
         /* static void SpaceRemove(string s)
          {
