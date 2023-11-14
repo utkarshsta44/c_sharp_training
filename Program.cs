@@ -1,133 +1,98 @@
 ﻿using System;
 
-namespace assignment2
+namespace advanced_Csharp
 {
+
+    public struct book
+    {
+        private string _title ;
+        private string _author;
+        private string _subject;
+        private  int bookid;
+
+
+
+        public book(string title, string author, string subject, int id)
+        {
+            _title = title;
+            _author = author;
+            _subject = subject;
+            bookid = id;
+        }
+        /*public book(string auth,string sub)
+        {
+            _author = "akshat kumar";
+            _subject = "c++ for beginners";
+        }
+        */
+
+        public void PrintBook()
+        {
+            Console.WriteLine($" Book_id :{bookid} \n Title:{_title}\n" +
+                $"Author : {_author}");
+        }
+
+
+
+    }
+
+
     class Program
     {
+
+
+        public enum LogTypes
+        {
+            Error = 66,
+            Warning = 800,
+            Fatal = 700,
+            Information = 900
+        }
         static void Main(string[] args)
         {
-            // Console.WriteLine("Hello World!");
-            //1.
-            int size;
-            Console.Write("Enter the size of array : ");
-            size = Convert.ToInt32(Console.ReadLine());
+            int myVar1 = (int)LogTypes.Error;
+            LogTypes myVar10 = LogTypes.Error;
 
-            int[] array = new int[size];
-            for (int i = 0; i < size; i++)
-            {
-                Console.Write(String.Format("Enter element at index {0} : ", i));
-                array[i] = Convert.ToInt32(Console.ReadLine());
-            }
-            Console.WriteLine(CountLeaders(array));
+            int myVar2 = (int)LogTypes.Warning;
+            int myVar3 = (int)LogTypes.Fatal;
+            int myVar4 = (int)LogTypes.Information;
+            Console.WriteLine((myVar10));
+            Console.WriteLine(myVar1);
+            Console.WriteLine(myVar2);
+            Console.WriteLine(myVar3);
+            Console.WriteLine(myVar4);
+
+            Program p1 = new Program();
+            p1.ErrorLogging("this is the error message", LogTypes.Error);
+
+
+
+            book book1 = new book("Encyclopedia ", "utkarsh", "science", 100001);
+            book1.PrintBook();
+
+
+
         }
 
-        //Question 1:
-        public static int BalancedIndex(int[] arr)
+        public void ErrorLogging(string message, LogTypes logtype)
         {
-            int totalSum = 0;
-            int leftSum = 0;
-
-            foreach (int num in arr)
+            switch (logtype)
             {
-                totalSum += num;
+                case LogTypes.Error:
+                    Console.WriteLine(message);
+                    break;
+                case LogTypes.Fatal:
+                    Console.WriteLine(message);
+                    break;
+                case LogTypes.Warning:
+                    Console.WriteLine(message);
+                    break;
+
+                case LogTypes.Information:
+                    Console.WriteLine(message);
+                    break;
             }
-
-            for (int i = 0; i < arr.Length; i++)
-            {
-                totalSum -= arr[i];
-
-                if (leftSum == totalSum)
-                {
-                    return i;
-                }
-
-                leftSum += arr[i];
-            }
-
-            return -1;
-        }
-
-        //2.   
-        public static int CountLeaders(int[] arr)
-        {
-            int maxRight = int.MinValue;
-            int count = 0;
-
-            for (int i = arr.Length - 1; i >= 0; i--)
-            {
-                if (arr[i] > maxRight)
-                {
-                    count++;
-                    maxRight = arr[i];
-                }
-            }
-
-            return count;
-        }
-
-
-
-        //3.
-        public static int switchcount(int[] arr)
-        {
-            int count = 0;
-            foreach (var it in arr)
-            {
-                int currentstate = arr[it];
-                if (count % 2 == 1)
-                {
-                    currentstate = arr[it] == 0 ? 1 : 0;
-                }
-                if (currentstate == 0)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-
-        public static int MinSwitchesToTurnOnAllBulbs(int[] bulbs)
-        {
-            int count = 0;
-
-            for (int i = 0; i < bulbs.Length; i++)
-            {
-                if (bulbs[i] == 0)
-                {
-                    count++;
-                    bulbs[i] = 1;
-
-                    for (int j = i + 1; j < bulbs.Length; j++)
-                    {
-                        bulbs[j] = 1 - bulbs[j];
-                    }
-                }
-            }
-
-            return count;
-        }
-
-
-
-
-
-
-        //4.
-        public static int MaxSubarraySum(int[] arr)
-        {
-            int maxSum = int.MinValue;
-            int currentSum = 0;
-
-            foreach (int num in arr)
-            {
-                currentSum = Math.Max(num, currentSum + num);
-                maxSum = Math.Max(maxSum, currentSum);
-            }
-
-            return maxSum;
         }
     }
 }
-
 
